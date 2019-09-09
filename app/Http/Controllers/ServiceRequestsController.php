@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ServiceRequests;
 
+use Debugbar;
+
 class ServiceRequestsController extends Controller {
 
   /**
@@ -12,6 +14,7 @@ class ServiceRequestsController extends Controller {
    * @return view
    */
   public function index(){
+
     $requests = ServiceRequests::orderBy('updated_at','desc')->paginate(20);
     return view('index',compact('requests'));
   }
