@@ -10,4 +10,10 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
   <link href="/css/landing-page.css" rel="stylesheet">
   @stack('styles')
+
+  <style>
+    .has-error input, .has-error select, .has-error textarea{
+      border: 2px solid red;
+    }
+  </style>
 </head>

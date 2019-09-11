@@ -12,4 +12,12 @@
 */
 
 Route::get('/', 'ServiceRequestsController@index')->name('home');
+Route::get('/create', 'ServiceRequestsController@create')->name('create');
+Route::post('/store', 'ServiceRequestsController@store')->name('doCreate');
 Route::get('{id}', 'ServiceRequestsController@edit')->name('edit');
+
+
+Route::get('/getModels/{id}', 'ServiceRequestsController@getModels');
+
+
+

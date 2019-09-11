@@ -50,4 +50,41 @@
   <script type="text/javascript">
     $(document).ready(function(){ console.log('loaded');});
   </script>
+  <script>
+  $(document).ready(function(){
+
+    $('body').on('change', '#vehicle-makes', function(){
+      var vehicle_make = $(this).val();
+
+      if(vehicle_make){
+
+        $.ajax({
+
+          url: '/getModels/' + vehicle_make,
+          type: 'GET',
+          dataType: 'json',
+          success: function(data){
+            $('#vehicle-models').empty();
+
+            $('#vehicle-models')
+              .append('<option value="">-- Select Model</option>');
+
+            $.each(data, function(key, value){
+              $('#vehicle-models')
+              .append('<option value="' + key + '">' + value.title + '</option>');
+            });
+          },
+          error: function(){
+            $('#vehicle-models').empty();
+
+            $('#vehicle-models')
+              .append('<option value="">-- Select Model</option>');
+          }
+        })      
+
+      }
+
+    });
+  });
+  </script>
   @stack('scripts')
