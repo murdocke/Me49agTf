@@ -11,13 +11,16 @@
 |
 */
 
+Route::get('/getModels/{id}', 'ServiceRequestsController@getModels');
+
 Route::get('/', 'ServiceRequestsController@index')->name('home');
 Route::get('/create', 'ServiceRequestsController@create')->name('create');
 Route::post('/store', 'ServiceRequestsController@store')->name('doCreate');
-Route::get('{id}', 'ServiceRequestsController@edit')->name('edit');
+Route::get('{serviceRequest}', 'ServiceRequestsController@edit')->name('edit');
+Route::post('/update', 'ServiceRequestsController@update')->name('doEdit');
 
 
-Route::get('/getModels/{id}', 'ServiceRequestsController@getModels');
+
 
 
 

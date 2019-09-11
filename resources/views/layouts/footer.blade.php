@@ -71,7 +71,7 @@
 
             $.each(data, function(key, value){
               $('#vehicle-models')
-              .append('<option value="' + key + '">' + value.title + '</option>');
+              .append('<option value="' + value.id + '">' + value.title + '</option>');
             });
           },
           error: function(){

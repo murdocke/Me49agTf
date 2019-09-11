@@ -29,6 +29,32 @@ class ServiceRequestsController extends Controller {
    */
   public function edit(ServiceRequests $serviceRequest){
 
+    //return $serviceRequest->id;
+    $vehicleMakes = VehicleMakes::orderBy('title')->get();
+    $currentVehicleModel = VehicleModels::find($serviceRequest->vehicle_model_id);
+    $currentVehicleMake = $currentVehicleModel->vehicle_make_id;
+    $currentVehicleModels = VehicleMakes::find($currentVehicleMake)->vehicleModels()->orderBy('title')->get();
+    return view('edit', compact('serviceRequest', 'vehicleMakes', 'currentVehicleMake', 'currentVehicleModels'));
+
+  }
+
+  public function update(Request $request){
+
+    //dd($request->request_id);
+    $serviceRequest = ServiceRequests::findorfail($request->request_id);
+
+    $serviceRequest->client_name = $request->client_name;
+    $serviceRequest->client_phone = $request->client_phone;
+    $serviceRequest->client_email = $request->client_email;
+    $serviceRequest->vehicle_model_id = $request->vehicle_model_id;
+    //dd($request->vehicle_model_id);
+    $serviceRequest->description = $request->description;    
+
+
+    $serviceRequest->save();
+
+    return redirect('/');
+
   }
 
   public function create(){
