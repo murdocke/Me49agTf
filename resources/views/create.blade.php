@@ -100,7 +100,7 @@
           <div class="col-12">
             <div class="form-group {{ $errors->has('description') ? 'has-error' :'' }}">
              <label for="description">Description</label>
-             <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+             <textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}</textarea>
           </div>            
 
           <div class="col-12 text-center mt-5">
