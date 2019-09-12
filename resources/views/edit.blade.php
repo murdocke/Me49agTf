@@ -97,16 +97,29 @@
             <div class="form-group {{ $errors->has('description') ? 'has-error' :'' }}">
              <label for="description">Description</label>
              <textarea name="description" class="form-control" id="description" rows="3">{{ $serviceRequest->description }}</textarea>
-          </div>            
+            </div> 
+          </div>           
 
           <div class="col-12 text-center mt-5">
             <input type="hidden" name="request_id" value="{{ $serviceRequest->id }}" />
-            <input type="submit" class="btn btn-primary btn-block" />
+            <button type="submit" class="btn btn-primary btn-block" />Update</button>
           </div>
 
         </div>
 
       </form>
+
+      <form method="POST" action="{{route('doDelete') }}">
+        {{ method_field('DELETE')}}
+        @csrf
+        <div class="row">
+          <div class="col-12 text-center mt-5">
+            <input type="hidden" name="request_id" value="{{ $serviceRequest->id }}" />
+            <button type="submit" class="btn btn-danger btn-block" />Delete</button>
+          </div>
+        </div>
+      </form>
+
     </div>
   </section>
 

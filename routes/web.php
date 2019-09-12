@@ -18,7 +18,7 @@ Route::get('/create', 'ServiceRequestsController@create')->name('create');
 Route::post('/store', 'ServiceRequestsController@store')->name('doCreate');
 Route::get('{serviceRequest}', 'ServiceRequestsController@edit')->name('edit');
 Route::post('/update', 'ServiceRequestsController@update')->name('doEdit');
-
+Route::delete('/','ServiceRequestsController@destroy')->name('doDelete');
 
 
 

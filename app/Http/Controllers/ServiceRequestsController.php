@@ -104,6 +104,16 @@ class ServiceRequestsController extends Controller {
 
   }
 
+  public function destroy(Request $request){
+
+    $serviceRequest = ServiceRequests::findorfail($request->request_id);
+
+    $serviceRequest->delete();
+
+    return redirect('/');       
+
+  }
+
   public function getModels($id){
 
     $vehicleModels = VehicleMakes::find($id)->vehicleModels()->orderBy('title')->get();
