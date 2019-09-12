@@ -53,7 +53,7 @@ class ServiceRequestsController extends Controller {
 
     $serviceRequest->save();
 
-    return redirect('/');
+    return redirect('/')->with('success', 'Service Request Ticket #' . $request->request_id . ' has been updated!');
 
   }
 
@@ -89,7 +89,7 @@ class ServiceRequestsController extends Controller {
     $validation = Validator::make($input, $rules, $messages);
 
       //get the models of the chosen make in case there is an error and we must return back to the page
-    
+
       //first check if they selected a make and otherwise keep the model array empty
       if(!empty($input['vehicle_make_id'])){
       $vehicleModels = VehicleMakes::find($input['vehicle_make_id'])->vehicleModels()->orderBy('title')->get();
@@ -108,7 +108,7 @@ class ServiceRequestsController extends Controller {
 
     $serviceRequest->save();
 
-    return redirect('/');
+    return redirect('/')->with('success', 'A New Service Request (ticket #' . $serviceRequest->id . ') has been created!');
 
   }
 
@@ -118,7 +118,7 @@ class ServiceRequestsController extends Controller {
 
     $serviceRequest->delete();
 
-    return redirect('/');       
+    return redirect('/')->with('success', 'Service Request (ticket #' . $request->request_id . ') has been deleted!');     
 
   }
 
