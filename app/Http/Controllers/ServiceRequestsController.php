@@ -40,8 +40,43 @@ class ServiceRequestsController extends Controller {
 
   public function update(Request $request){
 
+    $input = $request->all();
+
     //dd($request->request_id);
     $serviceRequest = ServiceRequests::findorfail($request->request_id);
+
+    //the validation was copied from the create method and could probably be refactored
+    $rules = array(
+      'vehicle_make_id' => 'required',
+      'vehicle_model_id' => 'required',
+      'client_name' => 'required',
+      'client_phone' => 'required|regex:^[0-9]$^',
+      'client_email' => 'required|email',
+      'description' => 'required'
+    );
+
+    $messages = [
+      'vehicle_make_id.required' => 'You must provide the make of your car.',
+      'vehicle_model_id.required' => 'You must provide the model of your car.',
+      'client_phone.numeric' => 'You must provide a valid phone number.',
+      'client_phone.regex' => 'You must provide a valid phone number.',
+    ];
+
+    $validation = Validator::make($input, $rules, $messages);
+
+    //first check if they selected a make and otherwise keep the model array empty
+    if(!empty($input['vehicle_make_id'])){
+      $vehicleModels = VehicleMakes::find($input['vehicle_make_id'])->vehicleModels()->orderBy('title')->get();
+      }else{
+       $vehicleModels = [];
+      }
+
+    if ($validation->fails()) {       
+      return redirect('/' . $request->request_id)
+        ->withErrors($validation)
+        ->withInput()
+        ->with('vehicleModels', $vehicleModels);
+    }
 
     $serviceRequest->client_name = $request->client_name;
     $serviceRequest->client_phone = $request->client_phone;
