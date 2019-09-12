@@ -88,8 +88,14 @@ class ServiceRequestsController extends Controller {
 
     $validation = Validator::make($input, $rules, $messages);
 
-      //get the models of the chosen make in case there is an error
+      //get the models of the chosen make in case there is an error and we must return back to the page
+    
+      //first check if they selected a make and otherwise keep the model array empty
+      if(!empty($input['vehicle_make_id'])){
       $vehicleModels = VehicleMakes::find($input['vehicle_make_id'])->vehicleModels()->orderBy('title')->get();
+      }else{
+       $vehicleModels = [];
+      }
 
     if ($validation->fails()) {       
       return redirect('/create')
