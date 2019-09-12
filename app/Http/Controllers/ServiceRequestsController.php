@@ -74,7 +74,7 @@ class ServiceRequestsController extends Controller {
       'vehicle_make_id' => 'required',
       'vehicle_model_id' => 'required',
       'client_name' => 'required',
-      'client_phone' => 'required',
+      'client_phone' => 'required|regex:^[0-9]$^',
       'client_email' => 'required|email',
       'description' => 'required'
     );
@@ -82,6 +82,8 @@ class ServiceRequestsController extends Controller {
     $messages = [
       'vehicle_make_id.required' => 'You must provide the make of your car.',
       'vehicle_model_id.required' => 'You must provide the model of your car.',
+      'client_phone.numeric' => 'You must provide a valid phone number.',
+      'client_phone.regex' => 'You must provide a valid phone number.',
     ];
 
     $validation = Validator::make($input, $rules, $messages);
